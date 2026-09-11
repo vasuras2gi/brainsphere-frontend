@@ -110,35 +110,37 @@ const CreateDebate = () => {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-purple-100 px-4"
+      className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-purple-100 px-4 py-8 md:py-12"
     >
-      <div className="create-card relative bg-white/70 backdrop-blur-2xl p-10 rounded-3xl shadow-2xl w-full max-w-lg border border-white/40">
+      <div className="create-card relative bg-white/70 backdrop-blur-2xl p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-lg border border-white/40">
         {/* Glow Background */}
-        <div className="absolute inset-0 pointer-events-none rounded-3xl bg-gradient-to-r from-indigo-400 to-purple-400 opacity-10 blur-3xl"></div>
+        <div className="absolute inset-0 pointer-events-none rounded-2xl sm:rounded-3xl bg-gradient-to-r from-indigo-400 to-purple-400 opacity-10 blur-3xl"></div>
 
-        <h2 className="text-3xl font-bold mb-6 text-indigo-600 relative z-10">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-indigo-600 relative z-10 text-center sm:text-left">
           Create Content
         </h2>
 
-        {/* MODE SWITCH */}
-        <div className="flex gap-3 mb-6 relative z-10">
+        {/* MODE SWITCH (Responsive layout & fonts) */}
+        <div className="flex flex-row gap-2 sm:gap-3 mb-6 relative z-10 w-full">
           <button
+            type="button"
             onClick={() => setMode("debate")}
-            className={`flex-1 py-3 rounded-xl transition-all duration-300 font-semibold ${
+            className={`flex-1 py-2.5 sm:py-3 px-3 rounded-xl transition-all duration-300 font-semibold text-xs sm:text-sm md:text-base text-white ${
               mode === "debate"
-                ? "bg-black neon-blue shadow-lg scale-105"
-                : "bg-black neon-white hover:scale-105"
+                ? "bg-black neon-blue shadow-lg scale-[1.02] sm:scale-105"
+                : "bg-black/80 neon-white hover:scale-[1.02] sm:hover:scale-105"
             }`}
           >
             Discussion
           </button>
 
           <button
+            type="button"
             onClick={() => setMode("post")}
-            className={`flex-1 py-3 rounded-xl transition-all duration-300 font-semibold ${
+            className={`flex-1 py-2.5 sm:py-3 px-3 rounded-xl transition-all duration-300 font-semibold text-xs sm:text-sm md:text-base text-white ${
               mode === "post"
-                ? "bg-black neon-blue shadow-lg scale-105"
-                : "bg-black neon-white hover:scale-105"
+                ? "bg-black neon-blue shadow-lg scale-[1.02] sm:scale-105"
+                : "bg-black/80 neon-white hover:scale-[1.02] sm:hover:scale-105"
             }`}
           >
             Feed Post
@@ -146,14 +148,14 @@ const CreateDebate = () => {
         </div>
 
         {errorMsg && (
-          <div className="error-box bg-red-100 text-red-600 text-sm p-3 rounded-lg mb-4 relative z-10">
+          <div className="error-box bg-red-100 text-red-600 text-xs sm:text-sm p-3 rounded-lg mb-4 relative z-10 break-words">
             {errorMsg}
           </div>
         )}
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-5 relative z-10"
+          className="flex flex-col gap-4 sm:gap-5 relative z-10 w-full"
         >
           {mode === "debate" && (
             <>
@@ -162,7 +164,7 @@ const CreateDebate = () => {
                 placeholder="Debate Title"
                 value={formData.title}
                 onChange={handleChange}
-                className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+                className="form-field w-full border p-3 rounded-xl text-sm sm:text-base focus:ring-2 focus:ring-indigo-400 outline-none transition bg-white/80"
               />
 
               <textarea
@@ -171,7 +173,7 @@ const CreateDebate = () => {
                 rows="4"
                 value={formData.description}
                 onChange={handleChange}
-                className="form-field border p-3 rounded-xl resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition"
+                className="form-field w-full border p-3 rounded-xl text-sm sm:text-base resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition bg-white/80"
               />
 
               <input
@@ -179,7 +181,7 @@ const CreateDebate = () => {
                 placeholder="Topic Tag (AI, Politics, Tech)"
                 value={formData.topicTag}
                 onChange={handleChange}
-                className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+                className="form-field w-full border p-3 rounded-xl text-sm sm:text-base focus:ring-2 focus:ring-indigo-400 outline-none transition bg-white/80"
               />
             </>
           )}
@@ -190,13 +192,13 @@ const CreateDebate = () => {
                 placeholder="Write caption..."
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="form-field border p-3 rounded-xl resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition"
+                className="form-field w-full border p-3 rounded-xl text-sm sm:text-base resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition bg-white/80"
               />
 
               <select
                 value={postType}
                 onChange={(e) => setPostType(e.target.value)}
-                className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+                className="form-field w-full border p-3 rounded-xl text-sm sm:text-base focus:ring-2 focus:ring-indigo-400 outline-none transition bg-white/80 cursor-pointer"
               >
                 <option value="image">Image Post</option>
                 <option value="short">60 Sec Short</option>
@@ -206,7 +208,7 @@ const CreateDebate = () => {
                 type="file"
                 accept={postType === "image" ? "image/*" : "video/*"}
                 onChange={(e) => setFile(e.target.files[0])}
-                className="form-field border p-3 rounded-xl"
+                className="form-field w-full border p-2.5 sm:p-3 rounded-xl text-xs sm:text-sm bg-white/80 file:mr-2 sm:file:mr-4 file:py-1 file:px-2 sm:file:py-2 sm:file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
               />
             </>
           )}
@@ -214,10 +216,10 @@ const CreateDebate = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`form-field text-white py-3 rounded-xl transition-all duration-300 ${
+            className={`form-field w-full text-white py-3 rounded-xl font-medium sm:font-semibold text-sm sm:text-base transition-all duration-300 ${
               loading
-                ? "bg-gray-400"
-                : "bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 shadow-lg"
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-indigo-500 to-purple-500 active:scale-95 sm:hover:scale-105 shadow-lg"
             }`}
           >
             {loading
@@ -233,3 +235,242 @@ const CreateDebate = () => {
 };
 
 export default CreateDebate;
+
+
+
+
+// import { useState, useEffect, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
+// import api from "../api/axios";
+// import { gsap } from "gsap";
+
+// const CreateDebate = () => {
+//   const navigate = useNavigate();
+//   const containerRef = useRef(null);
+
+//   const user = JSON.parse(localStorage.getItem("user"));
+
+//   const [mode, setMode] = useState("debate");
+//   const [postType, setPostType] = useState("image");
+
+//   const [formData, setFormData] = useState({
+//     title: "",
+//     description: "",
+//     topicTag: "",
+//   });
+
+//   const [caption, setCaption] = useState("");
+//   const [file, setFile] = useState(null);
+
+//   const [loading, setLoading] = useState(false);
+//   const [errorMsg, setErrorMsg] = useState("");
+
+//   /* ---------------- GSAP ENTRY ANIMATION ---------------- */
+//   useEffect(() => {
+//     const ctx = gsap.context(() => {
+//       gsap.fromTo(
+//         ".create-card",
+//         { y: 80, opacity: 0, scale: 0.95 },
+//         { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" },
+//       );
+
+//       gsap.fromTo(
+//         ".form-field",
+//         { y: 30, opacity: 0 },
+//         {
+//           y: 0,
+//           opacity: 1,
+//           duration: 0.6,
+//           stagger: 0.1,
+//           delay: 0.3,
+//           ease: "power3.out",
+//         },
+//       );
+//     }, containerRef);
+
+//     return () => ctx.revert();
+//   }, [mode]);
+
+//   /* ---------------- ERROR SHAKE ---------------- */
+//   useEffect(() => {
+//     if (!errorMsg) return;
+
+//     gsap.fromTo(
+//       ".error-box",
+//       { x: -10 },
+//       { x: 10, repeat: 3, yoyo: true, duration: 0.1 },
+//     );
+//   }, [errorMsg]);
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setErrorMsg("");
+
+//     try {
+//       setLoading(true);
+
+//       if (mode === "debate") {
+//         if (!formData.title || !formData.description) {
+//           return setErrorMsg("Title and Description are required");
+//         }
+
+//         await api.post("/debates", formData);
+//         navigate("/");
+//       }
+
+//       if (mode === "post") {
+//         if (!caption || !file) {
+//           return setErrorMsg("Caption and Media required");
+//         }
+
+//         const data = new FormData();
+//         data.append("caption", caption);
+//         data.append("type", postType);
+//         data.append("media", file);
+
+//         await api.post("/posts", data, {
+//           headers: {
+//             Authorization: `Bearer ${user.token}`,
+//             "Content-Type": "multipart/form-data",
+//           },
+//         });
+
+//         navigate("/feed");
+//       }
+//     } catch (error) {
+//       setErrorMsg(error.response?.data?.message || "Something went wrong");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-purple-100 px-4"
+//     >
+//       <div className="create-card relative bg-white/70 backdrop-blur-2xl p-10 rounded-3xl shadow-2xl w-full max-w-lg border border-white/40">
+//         {/* Glow Background */}
+//         <div className="absolute inset-0 pointer-events-none rounded-3xl bg-gradient-to-r from-indigo-400 to-purple-400 opacity-10 blur-3xl"></div>
+
+//         <h2 className="text-3xl font-bold mb-6 text-indigo-600 relative z-10">
+//           Create Content
+//         </h2>
+
+//         {/* MODE SWITCH */}
+//         <div className="flex gap-3 mb-6 relative z-10">
+//           <button
+//             onClick={() => setMode("debate")}
+//             className={`flex-1 py-3 rounded-xl transition-all duration-300 font-semibold ${
+//               mode === "debate"
+//                 ? "bg-black neon-blue shadow-lg scale-105"
+//                 : "bg-black neon-white hover:scale-105"
+//             }`}
+//           >
+//             Discussion
+//           </button>
+
+//           <button
+//             onClick={() => setMode("post")}
+//             className={`flex-1 py-3 rounded-xl transition-all duration-300 font-semibold ${
+//               mode === "post"
+//                 ? "bg-black neon-blue shadow-lg scale-105"
+//                 : "bg-black neon-white hover:scale-105"
+//             }`}
+//           >
+//             Feed Post
+//           </button>
+//         </div>
+
+//         {errorMsg && (
+//           <div className="error-box bg-red-100 text-red-600 text-sm p-3 rounded-lg mb-4 relative z-10">
+//             {errorMsg}
+//           </div>
+//         )}
+
+//         <form
+//           onSubmit={handleSubmit}
+//           className="flex flex-col gap-5 relative z-10"
+//         >
+//           {mode === "debate" && (
+//             <>
+//               <input
+//                 name="title"
+//                 placeholder="Debate Title"
+//                 value={formData.title}
+//                 onChange={handleChange}
+//                 className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+//               />
+
+//               <textarea
+//                 name="description"
+//                 placeholder="Write debate description..."
+//                 rows="4"
+//                 value={formData.description}
+//                 onChange={handleChange}
+//                 className="form-field border p-3 rounded-xl resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition"
+//               />
+
+//               <input
+//                 name="topicTag"
+//                 placeholder="Topic Tag (AI, Politics, Tech)"
+//                 value={formData.topicTag}
+//                 onChange={handleChange}
+//                 className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+//               />
+//             </>
+//           )}
+
+//           {mode === "post" && (
+//             <>
+//               <textarea
+//                 placeholder="Write caption..."
+//                 value={caption}
+//                 onChange={(e) => setCaption(e.target.value)}
+//                 className="form-field border p-3 rounded-xl resize-none focus:ring-2 focus:ring-indigo-400 outline-none transition"
+//               />
+
+//               <select
+//                 value={postType}
+//                 onChange={(e) => setPostType(e.target.value)}
+//                 className="form-field border p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none transition"
+//               >
+//                 <option value="image">Image Post</option>
+//                 <option value="short">60 Sec Short</option>
+//               </select>
+
+//               <input
+//                 type="file"
+//                 accept={postType === "image" ? "image/*" : "video/*"}
+//                 onChange={(e) => setFile(e.target.files[0])}
+//                 className="form-field border p-3 rounded-xl"
+//               />
+//             </>
+//           )}
+
+//           <button
+//             type="submit"
+//             disabled={loading}
+//             className={`form-field text-white py-3 rounded-xl transition-all duration-300 ${
+//               loading
+//                 ? "bg-gray-400"
+//                 : "bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 shadow-lg"
+//             }`}
+//           >
+//             {loading
+//               ? "Processing..."
+//               : mode === "debate"
+//                 ? "Create Discussion"
+//                 : "Post to Feed"}
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CreateDebate;
