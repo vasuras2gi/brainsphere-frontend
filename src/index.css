@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
-
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #1e293b;
+  background-color: #f8fafc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,72 +15,81 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Base structural overrides to prevent alignment and layout cutting bugs */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  /* Fixed: Removed place-items flex centering so scroll views flow naturally */
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #4f46e5;
   text-decoration: inherit;
+  transition: color 0.2s ease;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #6366f1;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  color: black;
-  width: 100%;
+/* Styled global animations utility keys */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.animate-slideDown {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Premium glowing neon rules used by your custom toggle buttons */
 .neon-white {
-  color: #ffffff;
-  text-shadow:
-    0 0 3px rgba(255,255,255,0.6),
-    0 0 6px rgba(255,255,255,0.4);
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15), inset 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
 .neon-blue {
-  color: #3b82f6;
-  text-shadow:
-    0 0 4px rgba(59,130,246,0.6),
-    0 0 8px rgba(59,130,246,0.4);
+  color: #3b82f6 !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.25), inset 0 0 6px rgba(59, 130, 246, 0.15);
+}
+
+/* Custom native web scrollbars configuration for cleaner dashboard lists */
+.CustomScrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.CustomScrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.CustomScrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.CustomScrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
